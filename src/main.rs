@@ -37,10 +37,8 @@ fn main() {
 }
 
 fn pw_from_constants() -> pw::PistonWindow {
-    let mut piston_window: pw::PistonWindow =
-        pw::WindowSettings::new(GAME_TITLE, [to_coord_u32(WIDTH), to_coord_u32(HEIGHT)])
-            .exit_on_esc(true)
-            .build()
-            .unwrap();
-    piston_window
+    pw::WindowSettings::new(GAME_TITLE, [to_coord_u32(WIDTH), to_coord_u32(HEIGHT)])
+        .exit_on_esc(true)
+        .build()
+        .unwrap()
 }
