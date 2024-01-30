@@ -18,20 +18,21 @@ const GAME_TITLE: &str = "Snake";
 
 fn main() {
     let mut piston_window: pw::PistonWindow = pw_from_constants();
-    let mut game: Game = Game::new(WIDTH, HEIGHT);
+    let mut snake_game: Game = Game::new(WIDTH, HEIGHT);
 
     while let Some(event) = piston_window.next() {
         if let Some(pw::Button::Keyboard(key)) = event.press_args() {
-            game.key_pressed(key);
+            snake_game.key_pressed(key);
         }
 
         piston_window.draw_2d(&event, |c, g, _| {
             pw::clear(BACK_COLOR, g);
-            game.draw(&c, g);
+            snake_game.draw(&c, g);
         });
 
-        event.update(|arg| {
-            game.update(arg.dt);
+        event.update(
+            |arg| {
+            snake_game.update(arg.dt);
         });
     }
 }

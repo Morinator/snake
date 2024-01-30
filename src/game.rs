@@ -1,6 +1,6 @@
 use piston_window as pw;
 
-use rand::{thread_rng, Rng};
+use rand::Rng;
 
 use crate::draw::{draw_block, draw_rectangle};
 use crate::snake::{Direction, Snake};
@@ -117,7 +117,7 @@ impl Game {
     }
 
     fn add_food(&mut self) {
-        let mut rng = thread_rng();
+        let mut rng = rand::thread_rng();
 
         let mut new_x = rng.gen_range(1..self.width - 1);
         let mut new_y = rng.gen_range(1..self.height - 1);
