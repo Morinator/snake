@@ -10,7 +10,7 @@ const BORDER_COLOR: pw::types::Color = [0.00, 0.00, 0.00, 1.0];
 const GAMEOVER_COLOR: pw::types::Color = [0.90, 0.00, 0.00, 0.5];
 
 const MOVING_PERIOD: f64 = 0.3;
-const RESTART_TIME: f64 = 1.0;
+const RESTART_TIME: f64 = 3.0;
 
 pub struct Game {
     snake: Snake,
@@ -46,10 +46,10 @@ impl Game {
         }
 
         let dir = match key {
-            pw::Key::Up => Some(Direction::Up),
-            pw::Key::Down => Some(Direction::Down),
-            pw::Key::Left => Some(Direction::Left),
-            pw::Key::Right => Some(Direction::Right),
+            pw::Key::Up | pw::Key::W => Some(Direction::Up),
+            pw::Key::Down | pw::Key::S => Some(Direction::Down),
+            pw::Key::Left | pw::Key::A => Some(Direction::Left),
+            pw::Key::Right | pw::Key::D => Some(Direction::Right),
             _ => Some(self.snake.head_direction()),
         };
 
