@@ -1,10 +1,8 @@
-use piston_window::types::Color;
-use piston_window::{Context, G2d};
-use std::collections::LinkedList;
+use piston_window as pw;
 
 use crate::draw::draw_block;
 
-const SNAKE_COLOR: Color = [0.00, 0.80, 0.00, 1.0];
+const SNAKE_COLOR: pw::types::Color = [0.00, 0.80, 0.00, 1.0];
 
 #[derive(Copy, Clone, PartialEq)]
 pub enum Direction {
@@ -32,13 +30,13 @@ struct Block {
 
 pub struct Snake {
     direction: Direction,
-    body: LinkedList<Block>,
+    body: std::collections::LinkedList<Block>,
     tail: Option<Block>,
 }
 
 impl Snake {
     pub fn new(x: i32, y: i32) -> Snake {
-        let mut body: LinkedList<Block> = LinkedList::new();
+        let mut body = std::collections::LinkedList::new();
         body.push_back(Block { x: x + 2, y });
         body.push_back(Block { x: x + 1, y });
         body.push_back(Block { x, y });
@@ -50,7 +48,7 @@ impl Snake {
         }
     }
 
-    pub fn draw(&self, con: &Context, g: &mut G2d) {
+    pub fn draw(&self, con: &pw::Context, g: &mut pw::G2d) {
         for block in &self.body {
             draw_block(SNAKE_COLOR, block.x, block.y, con, g);
         }

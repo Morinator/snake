@@ -1,14 +1,13 @@
-use piston_window::types::Color;
-use piston_window::*;
+use piston_window as pw;
 
 use rand::{thread_rng, Rng};
 
 use crate::draw::{draw_block, draw_rectangle};
 use crate::snake::{Direction, Snake};
 
-const FOOD_COLOR: Color = [0.80, 0.00, 0.00, 1.0];
-const BORDER_COLOR: Color = [0.00, 0.00, 0.00, 1.0];
-const GAMEOVER_COLOR: Color = [0.90, 0.00, 0.00, 0.5];
+const FOOD_COLOR: pw::types::Color = [0.80, 0.00, 0.00, 1.0];
+const BORDER_COLOR: pw::types::Color = [0.00, 0.00, 0.00, 1.0];
+const GAMEOVER_COLOR: pw::types::Color = [0.90, 0.00, 0.00, 0.5];
 
 const MOVING_PERIOD: f64 = 0.3;
 const RESTART_TIME: f64 = 1.0;
@@ -41,16 +40,16 @@ impl Game {
         }
     }
 
-    pub fn key_pressed(&mut self, key: Key) {
+    pub fn key_pressed(&mut self, key: pw::Key) {
         if self.game_over {
             return;
         }
 
         let dir = match key {
-            Key::Up => Some(Direction::Up),
-            Key::Down => Some(Direction::Down),
-            Key::Left => Some(Direction::Left),
-            Key::Right => Some(Direction::Right),
+            pw::Key::Up => Some(Direction::Up),
+            pw::Key::Down => Some(Direction::Down),
+            pw::Key::Left => Some(Direction::Left),
+            pw::Key::Right => Some(Direction::Right),
             _ => Some(self.snake.head_direction()),
         };
 
@@ -63,7 +62,7 @@ impl Game {
         self.update_snake(dir);
     }
 
-    pub fn draw(&self, con: &Context, g: &mut G2d) {
+    pub fn draw(&self, con: &pw::Context, g: &mut pw::G2d) {
         self.snake.draw(con, g);
 
         if self.food_exists {
