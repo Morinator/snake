@@ -4,7 +4,7 @@ use crate::draw::draw_block;
 
 const SNAKE_COLOR: pw::types::Color = [0.00, 0.80, 0.00, 1.0];
 
-#[derive(Copy, Clone, PartialEq)]
+#[derive(Copy, Clone, PartialEq, Debug)]
 pub enum Direction {
     Up,
     Down,
