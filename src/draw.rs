@@ -35,3 +35,15 @@ pub fn draw_rectangle(
 pub fn draw_block(color: pw::types::Color, x: i32, y: i32, con: &pw::Context, g: &mut pw::G2d) {
     draw_rectangle(color, x, y, 1, 1, con, g);
 }
+
+#[cfg(test)]
+mod test {
+
+    use crate::draw;
+
+    #[test]
+    fn array_direction_up() {
+        let x = 4;
+        assert_eq!(draw::to_coord_u32(x), 100)
+    }
+}
