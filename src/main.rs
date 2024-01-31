@@ -4,7 +4,6 @@ extern crate rand;
 mod draw;
 mod game;
 mod snake;
-mod test;
 
 use crate::draw::to_coord_u32;
 use crate::game::Game;
