@@ -25,11 +25,12 @@ const GAME_TITLE: &str = "Snake";
 fn main() {
     let mut piston_window: pw::PistonWindow = pw_from_constants();
 
-    // Load font for score display - try common Windows font paths
-    let font_path = find_font();
     let mut glyphs = piston_window
-        .load_font(font_path, pw::wgpu_graphics::TextureSettings::new())
-        .expect("Failed to load font");
+        .load_builtin_font(
+            pw::BuiltInFont::FiraSansRegular,
+            pw::wgpu_graphics::TextureSettings::new(),
+        )
+        .expect("Piston's built-in font should load");
 
     let sound_player = SoundPlayer::new();
     let mut snake_game: Game = Game::new(WIDTH, HEIGHT, sound_player);
@@ -66,34 +67,6 @@ fn main() {
             spectator.send(snake_game.game_snapshot());
         });
     }
-}
-
-fn find_font() -> std::path::PathBuf {
-    // Try common font locations on macOS and Windows
-    let candidates = [
-
-        // macOS system fonts
-        "/System/Library/Fonts/Helvetica.ttc",
-        "/System/Library/Fonts/Supplemental/Arial.ttf",
-        "/System/Library/Fonts/Supplemental/Courier New.ttf",
-        "/Library/Fonts/Arial.ttf",
-
-        // Windows fonts
-        "C:/Windows/Fonts/consola.ttf",    // Consolas (monospace)
-        "C:/Windows/Fonts/arial.ttf",      // Arial
-        "C:/Windows/Fonts/segoeui.ttf",    // Segoe UI
-        "C:/Windows/Fonts/cour.ttf",       // Courier New
-    ];
-
-    for path in candidates {
-        let p = std::path::PathBuf::from(path);
-        if p.exists() {
-            return p;
-        }
-    }
-
-    // Fallback - will likely fail but gives a clear error message
-    std::path::PathBuf::from("/System/Library/Fonts/Helvetica.ttc")
 }
 
 fn pw_from_constants() -> pw::PistonWindow {
